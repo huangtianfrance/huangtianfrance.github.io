@@ -1,12 +1,16 @@
 ---
 title: "What Do People Really Ask ChatGPT?"
-excerpt: "A Data Analysis of Prompt Structure and Response Readability<br/><img src='/images/500x300.png'>"
+excerpt: "A Data Analysis of Prompt Structure and Response Readability<br/><img src='/images/0chatgpt-data-analysis/chatgpt-data-0.png'>"
 collection: portfolio
 ---
+
+{% include figure.liquid loading="eager" path="assets/images/0chatgpt-data-analysis/chatgpt-data-0.png" title="chatgpt-data-analysis-hero" class="img-fluid rounded z-depth-1 watermarked" alt="chatgpt-data-analysis"%}
+
 
 Ever wonder if ChatGPT talks like a textbook or a friend? I got curious and decided to find out — so I pulled a dataset of ~52,000 real ChatGPT instruction-response pairs and ran some analysis on it.
 
 Here's what I found.
+
 
 ---
 
