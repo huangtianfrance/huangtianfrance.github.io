@@ -4,6 +4,7 @@ excerpt: "A Data Analysis of Prompt Structure and Response Readability<br/><img 
 collection: portfolio
 ---
 
+![Editing a Markdown file for a talk](/images/0chatgpt-data-analysis/chatgpt-data-0.png)
 
 Ever wonder if ChatGPT talks like a textbook or a friend? I got curious and decided to find out — so I pulled a dataset of ~52,000 real ChatGPT instruction-response pairs and ran some analysis on it.
 
@@ -20,7 +21,9 @@ I used the [alpaca-gpt4 dataset](https://huggingface.co/datasets/vicgalle/alpaca
 df = pd.read_parquet("hf://datasets/vicgalle/alpaca-gpt4/data/train-00000-of-00001-6ef3991c06080e14.parquet")
 ```
 
-Three columns matter here: `instruction` (the prompt), `input` (optional extra context), and `output` (ChatGPT's response).
+Three columns matter here: `instruction` (the prompt), `input` (optional extra context), `output` (ChatGPT's response) and `text` (the full training sentence that combines the instruction, input, and output).
+
+
 
 ---
 
@@ -46,6 +49,8 @@ wordcloud = WordCloud(width=1200, height=800, stopwords=stop_words).generate(all
 
 The result? Topics like *story*, *email*, *recipe*, *sentence*, *product*, and *code* dominate. People are mostly using ChatGPT as a writing assistant and task executor — not a search engine.
 
+![Word Cloud](images/wordcloud.png)
+
 ---
 
 ## 2. How Are Prompts Structured?
@@ -68,6 +73,8 @@ def categorize_prompt(text):
 
 **Creative Tasks** came out on top by a wide margin, followed by **Listing Tasks** and **Explanations**. People lean heavily toward asking ChatGPT to *make* things rather than just *explain* them.
 
+<iframe src="charts/prompt_types.html" width="100%" height="500"></iframe>
+
 ---
 
 ## 3. Are ChatGPT Answers Easy to Read?
@@ -88,6 +95,8 @@ def readability_level(score):
 ```
 
 The majority of responses scored in the **"Easy" to "Medium"** range — roughly the level of a magazine article or popular blog post. ChatGPT doesn't write like a PhD thesis, but it's not dumbing things down either. It sits comfortably in the middle.
+
+<iframe src="charts/readability_levels.html" width="100%" height="500"></iframe>
 
 ---
 
@@ -110,6 +119,8 @@ fig = px.scatter(
 
 The regression line shows a **slight negative trend** — meaning longer prompts are weakly associated with *lower* (harder) readability scores. But the effect is small and there's a ton of variance. The real takeaway: prompt length alone isn't a strong predictor of answer complexity.
 
+<iframe src="charts/prompt_vs_readability.html" width="100%" height="500"></iframe>
+
 ---
 
 ## 5. How Verbose Is ChatGPT?
@@ -126,6 +137,8 @@ df["words_per_sentences"] = df["output_word_count"] / df["sentence_count"]
 
 The box plot told a clean story: **Q1 to Q3 falls between ~10 and ~21 words per sentence**. That's solidly in "moderate" territory — not terse bullet points, not run-on academic prose. ChatGPT writes like someone who took a good writing class.
 
+<iframe src="charts/sentence_length_box.html" width="100%" height="500"></iframe>
+
 ---
 
 ## 6. Does Adding Context Actually Help?
@@ -141,6 +154,8 @@ comparison = df.groupby("has_input")[["output_word_count", "flesch_score"]].mean
 ```
 
 Results: prompts **with** extra context got **longer responses** on average, but the **readability scores were similar**. So context makes ChatGPT more verbose, but not necessarily harder or easier to read. Interesting — it adapts quantity, not complexity.
+
+<iframe src="charts/context_effect.html" width="100%" height="500"></iframe>
 
 ---
 
@@ -164,4 +179,4 @@ Here's the short version of what I learned:
 - `plotly` + `seaborn` — interactive and static charts
 - `numpy` — regression calculations
 
-Full code is on [GitHub](#) if you want to poke around or reproduce the analysis.
+So, does ChatGPT talk like a textbook or a friend? The answer is… a bit of both! Next time you ask a question, consider how you phrase it — the way you write your prompt can nudge the AI toward clarity, creativity, or casual conversation.
