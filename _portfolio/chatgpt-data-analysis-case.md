@@ -179,7 +179,14 @@ Here's the short version of what I learned:
 So, does ChatGPT talk like a textbook or a friend? The answer is… a bit of both! Next time you ask a question, consider how you phrase it — the way you write your prompt can nudge the AI toward clarity, creativity, or casual conversation.
 
 <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+
 <script>
+function renderPlot(divId, jsonPath){
+  fetch(jsonPath)
+    .then(r => r.json())
+    .then(fig => Plotly.newPlot(divId, fig.data, fig.layout, {responsive:true}));
+}
+
 renderPlot("chart1", "/assets/charts/0chatgpt-analysis/prompt_types.json");
 renderPlot("chart2", "/assets/charts/0chatgpt-analysis/readability_levels.json");
 renderPlot("chart3", "/assets/charts/0chatgpt-analysis/prompt_vs_readability.json");
