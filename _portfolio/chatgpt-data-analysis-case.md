@@ -46,7 +46,7 @@ all_text = " ".join(df["instruction"].apply(clean_text))
 wordcloud = WordCloud(width=1200, height=800, stopwords=stop_words).generate(all_text)
 ```
 
-The result? Topics like *story*, *email*, *recipe*, *sentence*, *product*, and *code* dominate. People are mostly using ChatGPT as a writing assistant and task executor — not a search engine.
+The result? Topics like *story*, *question*, *topic*, *concept*, *product*, and *item* dominate. People are mostly using ChatGPT as a writing assistant and task executor — not a search engine.
 
 ![Word Cloud](/images/0chatgpt-data-analysis/wordcloud.png)
 
