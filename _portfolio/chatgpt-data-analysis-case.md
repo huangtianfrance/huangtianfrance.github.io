@@ -4,6 +4,20 @@ excerpt: "A Data Analysis of Prompt Structure and Response Readability<br/><img 
 collection: portfolio
 ---
 
+<script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+<script>
+function renderPlot(divId, jsonPath){
+  fetch(jsonPath)
+    .then(r => r.json())
+    .then(fig => Plotly.newPlot(divId, fig.data, fig.layout, {responsive:true}));
+}
+
+// 调用函数渲染不同位置的图表
+renderPlot("chart1","/assets/charts/0chatgpt-analysis/readability_levels.json");
+renderPlot("chart2","/assets/charts/0chatgpt-analysis/another_chart.json");
+renderPlot("chart3","/assets/charts/0chatgpt-analysis/yet_another_chart.json");
+</script>
+
 ![Editing a Markdown file for a talk](/images/0chatgpt-data-analysis/chatgpt-data-0.png)
 
 Ever wonder if ChatGPT talks like a textbook or a friend? I got curious and decided to find out — so I pulled a dataset of ~52,000 real ChatGPT instruction-response pairs and ran some analysis on it.
@@ -69,15 +83,8 @@ def categorize_prompt(text):
 ```
 
 **Creative Tasks** came out on top by a wide margin, followed by **Listing Tasks** and **Explanations**. People lean heavily toward asking ChatGPT to *make* things rather than just *explain* them.
+<div id="chart1"></div>
 
-<div id="chart"></div>
-
-<script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
-<script>
-fetch("/assets/charts/0chatgpt-analysis/prompt_types.json")
-.then(r => r.json())
-.then(fig => Plotly.newPlot("chart", fig.data, fig.layout, {responsive:true}));
-</script>
 
 
 
@@ -100,16 +107,8 @@ def readability_level(score):
 ```
 
 The majority of responses scored in the **"Easy" to "Medium"** range — roughly the level of a magazine article or popular blog post. ChatGPT doesn't write like a PhD thesis, but it's not dumbing things down either. It sits comfortably in the middle.
+<div id="chart2"></div>
 
-
-<div id="chart"></div>
-
-<script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
-<script>
-fetch("/assets/charts/0chatgpt-analysis/readability_levels.json")
-.then(r => r.json())
-.then(fig => Plotly.newPlot("chart", fig.data, fig.layout, {responsive:true}));
-</script>
 
 
 
@@ -131,15 +130,8 @@ fig = px.scatter(
 ```
 
 The regression line shows a **slight negative trend** — meaning longer prompts are weakly associated with *lower* (harder) readability scores. But the effect is small and there's a ton of variance. The real takeaway: prompt length alone isn't a strong predictor of answer complexity.
+<div id="chart3"></div>
 
-<div id="chart"></div>
-
-<script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
-<script>
-fetch("/assets/charts/0chatgpt-analysis/prompt_vs_readability.json")
-.then(r => r.json())
-.then(fig => Plotly.newPlot("chart", fig.data, fig.layout, {responsive:true}));
-</script>
 
 ## 5. How Verbose Is ChatGPT?
 
@@ -155,15 +147,9 @@ df["words_per_sentences"] = df["output_word_count"] / df["sentence_count"]
 
 The box plot told a clean story: **Q1 to Q3 falls between ~10 and ~21 words per sentence**. That's solidly in "moderate" territory — not terse bullet points, not run-on academic prose. ChatGPT writes like someone who took a good writing class.
 
+<div id="chart4"></div>
 
-<div id="chart"></div>
 
-<script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
-<script>
-fetch("/assets/charts/0chatgpt-analysis/sentence_length_box.json")
-.then(r => r.json())
-.then(fig => Plotly.newPlot("chart", fig.data, fig.layout, {responsive:true}));
-</script>
 
 ## 6. Does Adding Context Actually Help?
 
@@ -179,14 +165,8 @@ comparison = df.groupby("has_input")[["output_word_count", "flesch_score"]].mean
 
 Results: prompts **with** extra context got **longer responses** on average, but the **readability scores were similar**. So context makes ChatGPT more verbose, but not necessarily harder or easier to read. Interesting — it adapts quantity, not complexity.
 
-<div id="chart"></div>
+<div id="chart5"></div>
 
-<script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
-<script>
-fetch("/assets/charts/0chatgpt-analysis/context_effect.json")
-.then(r => r.json())
-.then(fig => Plotly.newPlot("chart", fig.data, fig.layout, {responsive:true}));
-</script>
 
 
 ## Takeaways
@@ -210,3 +190,12 @@ Here's the short version of what I learned:
 - `numpy` — regression calculations
 
 So, does ChatGPT talk like a textbook or a friend? The answer is… a bit of both! Next time you ask a question, consider how you phrase it — the way you write your prompt can nudge the AI toward clarity, creativity, or casual conversation.
+
+<script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+<script>
+renderPlot("chart1", "/assets/charts/0chatgpt-analysis/prompt_types.json");
+renderPlot("chart2", "/assets/charts/0chatgpt-analysis/readability_levels.json");
+renderPlot("chart3", "/assets/charts/0chatgpt-analysis/prompt_vs_readability.json");
+renderPlot("chart4", "/assets/charts/0chatgpt-analysis/sentence_length_box.json");
+renderPlot("chart5", "/assets/charts/0chatgpt-analysis/context_effect.json");
+</script>
