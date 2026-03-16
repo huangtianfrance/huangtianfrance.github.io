@@ -72,11 +72,11 @@ def categorize_prompt(text):
 
 <div id="chart"></div>
 
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
 <script>
-fetch("/assets/charts/0chatgpt-analysis/prompt_types.json")
+fetch("/charts/prompt_types.json")
 .then(r => r.json())
-.then(fig => Plotly.newPlot("chart", fig.data, fig.layout));
+.then(fig => Plotly.newPlot("chart", fig.data, fig.layout, {responsive:true}));
 </script>
 
 ```plotly
