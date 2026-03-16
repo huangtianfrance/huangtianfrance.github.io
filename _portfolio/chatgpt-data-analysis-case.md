@@ -4,25 +4,12 @@ excerpt: "A Data Analysis of Prompt Structure and Response Readability<br/><img 
 collection: portfolio
 ---
 
-<script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
-<script>
-function renderPlot(divId, jsonPath){
-  fetch(jsonPath)
-    .then(r => r.json())
-    .then(fig => Plotly.newPlot(divId, fig.data, fig.layout, {responsive:true}));
-}
-
-// 调用函数渲染不同位置的图表
-renderPlot("chart1","/assets/charts/0chatgpt-analysis/readability_levels.json");
-renderPlot("chart2","/assets/charts/0chatgpt-analysis/another_chart.json");
-renderPlot("chart3","/assets/charts/0chatgpt-analysis/yet_another_chart.json");
-</script>
-
-![Editing a Markdown file for a talk](/images/0chatgpt-data-analysis/chatgpt-data-0.png)
 
 Ever wonder if ChatGPT talks like a textbook or a friend? I got curious and decided to find out — so I pulled a dataset of ~52,000 real ChatGPT instruction-response pairs and ran some analysis on it.
 
 Here's what I found.
+
+![Editing a Markdown file for a talk](/images/0chatgpt-data-analysis/chatgpt-data-0.png)
 
 
 
