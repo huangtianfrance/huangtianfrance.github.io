@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Tian Huang | Building with Data"
+title: ""
 author_profile: true
 redirect_from: 
   - /about/
