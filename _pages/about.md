@@ -14,13 +14,13 @@ With 6 years of experience across e-commerce and international environments, I s
 
 I’ve led data-driven initiatives such as:
 
-Pricing strategy optimization across 6000+ SKUs
+- Pricing strategy optimization across 6000+ SKUs
 
-Building scalable dashboards and reporting systems used by business teams
+- Building scalable dashboards and reporting systems used by business teams
 
-Designing data workflows to clean, structure, and analyze unreliable real-world datasets
+- Designing data workflows to clean, structure, and analyze unreliable real-world datasets
 
-Bridging the gap between business needs and technical implementation
+- Bridging the gap between business needs and technical implementation
 
 I don’t just analyze data —
 I own the problem end-to-end, from raw data to business impact. 
